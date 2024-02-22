@@ -75,13 +75,10 @@ export class FinalityRepository extends BaseRepository {
 
     const query: FinalityRow[] = await knex('finality as f').join(
       maxTimestampSubquery,
-      function () {
-        this.on('f.project_id', '=', 'max_f.project_id').andOn(
-          'f.timestamp',
-          '=',
-          'max_f.max_timestamp',
-        )
-      },
+      (join) =>
+        join
+          .on('f.project_id', '=', 'max_f.project_id')
+          .andOn('f.timestamp', '=', 'max_f.max_timestamp'),
     )
 
     return query.map(toRecord)
