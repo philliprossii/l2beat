@@ -1,12 +1,12 @@
 export type ScalingProjectDataAvailabilityMode =
-  | 'StateDiffs'
-  | 'TxData'
-  | 'NotApplicable'
+  | 'State diffs'
+  | 'Transaction data'
+  | 'Not applicable'
 
 export type ScalingProjectDataAvailability =
   | {
       layer: 'On chain' | 'On chain (blobs)'
-      type: 'State diffs' | 'Transaction data' | 'Not applicable'
+      type: ScalingProjectDataAvailabilityMode
     }
   | {
       layer: 'MEMO' | 'DAC' | 'Celestia' | 'External' | 'MantleDA'
@@ -18,5 +18,5 @@ export type ScalingProjectDataAvailability =
         | 'Optimistic'
         | 'DAC Members'
         | `${number}/${number} DAC Members`
-      type: 'State diffs' | 'Transaction data' | 'Not applicable'
+      type: ScalingProjectDataAvailabilityMode
     }
