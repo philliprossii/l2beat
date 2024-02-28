@@ -1,6 +1,8 @@
+import { isOffChainDataAvailability } from '@l2beat/config'
 import React from 'react'
 
 import { ActivityViewEntry } from '../../../pages/scaling/activity/types'
+import { ScalingDataAvailabilityViewEntry } from '../../../pages/scaling/data-availability/types'
 import { ScalingFinalityViewEntry } from '../../../pages/scaling/finality/types'
 import { ScalingLivenessViewEntry } from '../../../pages/scaling/liveness/types'
 import { LivenessDurationTimeRangeCell } from '../../../pages/scaling/liveness/view/LivenessDurationTimeRangeCell'
@@ -703,6 +705,80 @@ export function getScalingFinalityColumnsConfig() {
       tooltip:
         'Time interval between state root submission and state root finalization. For Optimistic Rollups, this usually corresponds to the challenge period, whereas for ZK Rollups, it might be added as a safety precaution.',
       getValue: (project) => <span>{project.finalizationPeriod}</span>,
+    },
+  ]
+  return columns
+}
+
+export function getScalingDataAvailabilityColumnsConfig() {
+  const columns: ColumnConfig<ScalingDataAvailabilityViewEntry>[] = [
+    ...getProjectWithIndexColumns({ indexAsDefaultSort: true }),
+    {
+      name: 'Type',
+      tooltip: <TypeColumnTooltip />,
+      getValue: (project) => (
+        <TypeCell provider={project.provider}>{project.category}</TypeCell>
+      ),
+      sorting: {
+        getOrderValue: (project) => project.category,
+        rule: 'alphabetical',
+      },
+    },
+    {
+      name: 'Layer',
+      getValue: (project) => project.dataAvailability.layer,
+      sorting: {
+        getOrderValue: (project) => project.dataAvailability.layer,
+        rule: 'alphabetical',
+      },
+    },
+    {
+      name: 'Fallback',
+      getValue: (project) =>
+        isOffChainDataAvailability(project.dataAvailability) ? (
+          project.dataAvailability.fallback
+        ) : (
+          <Badge type="gray">N/A</Badge>
+        ),
+      sorting: {
+        getOrderValue: (project) =>
+          isOffChainDataAvailability(project.dataAvailability)
+            ? project.dataAvailability.fallback
+            : undefined,
+        rule: 'alphabetical',
+      },
+    },
+    {
+      name: 'Bridge',
+      getValue: (project) =>
+        isOffChainDataAvailability(project.dataAvailability) ? (
+          project.dataAvailability.bridge
+        ) : (
+          <Badge type="gray">N/A</Badge>
+        ),
+      sorting: {
+        getOrderValue: (project) =>
+          isOffChainDataAvailability(project.dataAvailability)
+            ? project.dataAvailability.bridge
+            : undefined,
+        rule: 'alphabetical',
+      },
+    },
+    {
+      name: 'Type of data',
+      getValue: (project) =>
+        project.dataAvailability.type === 'Not applicable' ? (
+          <Badge type="gray">N/A</Badge>
+        ) : (
+          project.dataAvailability.type
+        ),
+      sorting: {
+        getOrderValue: (project) =>
+          project.dataAvailability.type !== 'Not applicable'
+            ? project.dataAvailability.type
+            : undefined,
+        rule: 'alphabetical',
+      },
     },
   ]
   return columns

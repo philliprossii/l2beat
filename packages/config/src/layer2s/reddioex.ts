@@ -12,7 +12,7 @@ import {
   STATE_CORRECTNESS,
   TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
-import { DATA_AVAILABILITY } from '../common/dataAvailabilty'
+import { DATA_AVAILABILITY } from '../common/dataAvailability'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import {
   getCommittee,
