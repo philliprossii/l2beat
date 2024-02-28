@@ -8,7 +8,6 @@ import {
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   KnowledgeNugget,
@@ -23,6 +22,7 @@ import {
   ScalingProjectRiskViewEntry,
   ScalingProjectStateDerivation,
   ScalingProjectTechnologyChoice,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../../common'
 import { subtractOne } from '../../common/assessCount'
 import { ChainConfig } from '../../common/ChainConfig'
@@ -84,8 +84,6 @@ export function opStack(templateVars: OpStackConfig): Layer2 {
         templateVars.daProvider !== undefined
           ? 'Optimium'
           : 'Optimistic Rollup',
-      dataAvailabilityMode:
-        templateVars.daProvider !== undefined ? 'NotApplicable' : 'TxData',
       warning:
         templateVars.display.warning === undefined
           ? 'Fraud proof system is currently under development. Users need to trust the block proposer to submit correct L1 state roots.'
@@ -158,6 +156,18 @@ export function opStack(templateVars: OpStackConfig): Layer2 {
           : templateVars.finality,
     },
     chainConfig: templateVars.chainConfig,
+    dataAvailability:
+      templateVars.daProvider !== undefined
+        ? {
+            layer: 'Celestia',
+            bridge: 'None',
+            fallback: 'On chain',
+            type: 'Not applicable',
+          }
+        : {
+            layer: 'On chain',
+            type: 'Transaction data',
+          },
     riskView: makeBridgeCompatible({
       stateValidation: RISK_VIEW.STATE_NONE,
       dataAvailability: {
@@ -438,9 +448,9 @@ function technologyDA(
 ): ScalingProjectTechnologyChoice {
   switch (DA) {
     case 'Celestia':
-      return DATA_AVAILABILITY.CELESTIA_OFF_CHAIN(false)
+      return TECHNOLOGY_DATA_AVAILABILITY.CELESTIA_OFF_CHAIN(false)
     case undefined:
-      return DATA_AVAILABILITY.ON_CHAIN
+      return TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN
     default:
       assertUnreachable(DA)
   }

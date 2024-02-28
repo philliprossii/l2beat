@@ -6,6 +6,7 @@ import {
   Milestone,
   ScalingProjectConfig,
   ScalingProjectContracts,
+  ScalingProjectDataAvailability,
   ScalingProjectDisplay,
   ScalingProjectPermission,
 } from '../../common'
@@ -35,6 +36,8 @@ export interface Layer2 {
   config: Layer2Config
   /** Technical chain configuration */
   chainConfig?: ChainConfig
+  /** Data availability of scaling project project */
+  dataAvailability?: ScalingProjectDataAvailability
   /** Risk view values for this layer2 */
   riskView: ScalingProjectRiskView
   /** Rollup stage */

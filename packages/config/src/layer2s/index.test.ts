@@ -126,9 +126,8 @@ describe('layer2s', () => {
           project.display.category === 'Validium'
         ) {
           it(project.id.toString(), () => {
-            expect(project.display.dataAvailabilityMode).toEqual(
-              'NotApplicable',
-            )
+            if (!project.dataAvailability) return
+            expect(project.dataAvailability?.type).toEqual('Not applicable')
           })
         }
       }

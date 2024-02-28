@@ -3,7 +3,6 @@ import { assert, ProjectId } from '@l2beat/shared-pure'
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   KnowledgeNugget,
@@ -13,6 +12,7 @@ import {
   RISK_VIEW,
   ScalingProjectEscrow,
   ScalingProjectPermission,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../../common'
 import { subtractOne } from '../../common/assessCount'
 import { ProjectDiscovery } from '../../discovery/ProjectDiscovery'
@@ -116,10 +116,10 @@ export function orbitStackCommon(
               Record<string, number>
             >('SequencerInbox', 'dacKeyset')
 
-            return DATA_AVAILABILITY.ANYTRUST_OFF_CHAIN(DAC)
+            return TECHNOLOGY_DATA_AVAILABILITY.ANYTRUST_OFF_CHAIN(DAC)
           })()
         : {
-            ...DATA_AVAILABILITY.ON_CHAIN_CANONICAL,
+            ...TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN_CANONICAL,
             references: [
               {
                 text: 'Sequencing followed by deterministic execution - Arbitrum documentation',
@@ -259,15 +259,15 @@ export function orbitStackL3(templateVars: OrbitStackConfigL3): Layer3 {
       ...templateVars.display,
       provider: 'Arbitrum Orbit',
       category: postsToExternalDA ? 'Optimium' : 'Optimistic Rollup',
-      dataAvailabilityMode: 'NotApplicable',
     },
     riskView: makeBridgeCompatible({
       stateValidation: RISK_VIEW.STATE_ARBITRUM_FRAUD_PROOFS(nOfChallengers),
       dataAvailability: postsToExternalDA
         ? (() => {
-            const DAC = templateVars.discovery.getContractValue<
-              Record<string, number>
-            >('SequencerInbox', 'dacKeyset')
+            const DAC = templateVars.discovery.getContractValue<{
+              keyCount: number
+              threshold: number
+            }>('SequencerInbox', 'dacKeyset')
             return RISK_VIEW.DATA_EXTERNAL_DAC(DAC)
           })()
         : RISK_VIEW.DATA_ON_CHAIN_L2,
@@ -330,7 +330,6 @@ export function orbitStackL2(templateVars: OrbitStackConfigL2): Layer2 {
       ...templateVars.display,
       provider: 'Arbitrum',
       category: postsToExternalDA ? 'Optimium' : 'Optimistic Rollup',
-      dataAvailabilityMode: postsToExternalDA ? 'NotApplicable' : 'TxData',
     },
     stage: postsToExternalDA
       ? {
@@ -356,13 +355,25 @@ export function orbitStackL2(templateVars: OrbitStackConfigL2): Layer2 {
             delayWith30DExitWindow: false,
           },
         }),
+    dataAvailability: postsToExternalDA
+      ? {
+          layer: 'DAC',
+          bridge: 'None',
+          fallback: 'None',
+          type: 'Not applicable',
+        }
+      : {
+          layer: 'On chain',
+          type: 'Transaction data',
+        },
     riskView: makeBridgeCompatible({
       stateValidation: RISK_VIEW.STATE_ARBITRUM_FRAUD_PROOFS(nOfChallengers),
       dataAvailability: postsToExternalDA
         ? (() => {
-            const DAC = templateVars.discovery.getContractValue<
-              Record<string, number>
-            >('SequencerInbox', 'dacKeyset')
+            const DAC = templateVars.discovery.getContractValue<{
+              keyCount: number
+              threshold: number
+            }>('SequencerInbox', 'dacKeyset')
             return RISK_VIEW.DATA_EXTERNAL_DAC(DAC)
           })()
         : RISK_VIEW.DATA_ON_CHAIN_L2,

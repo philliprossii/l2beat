@@ -7,7 +7,6 @@ import {
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
@@ -15,6 +14,7 @@ import {
   NUGGETS,
   OPERATOR,
   RISK_VIEW,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
 import { subtractOne } from '../common/assessCount'
 import { UPGRADE_MECHANISM } from '../common/upgradeMechanism'
@@ -50,7 +50,7 @@ const nOfChallengers = discovery.getContractValue<string[]>(
   'validators',
 ).length
 
-const DAC = discovery.getContractValue<Record<number, number>>(
+const DAC = discovery.getContractValue<{ keyCount: number; threshold: number }>(
   'SequencerInbox',
   'dacKeyset',
 )
@@ -65,7 +65,6 @@ export const nova: Layer2 = {
       'Arbitrum Nova is an AnyTrust Optimium, differing from Arbitrum One by not posting transaction data onchain.',
     purposes: ['Universal'],
     category: 'Optimium',
-    dataAvailabilityMode: 'NotApplicable',
     provider: 'Arbitrum',
     links: {
       websites: [
@@ -123,6 +122,12 @@ export const nova: Layer2 = {
       startBlock: 1,
     },
   },
+  dataAvailability: {
+    layer: 'DAC',
+    bridge: `${DAC.keyCount - DAC.threshold + 1}/${DAC.keyCount} DAC Members`,
+    fallback: 'None',
+    type: 'Not applicable',
+  },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ARBITRUM_FRAUD_PROOFS(nOfChallengers),
     dataAvailability: RISK_VIEW.DATA_EXTERNAL_DAC(DAC),
@@ -179,7 +184,7 @@ export const nova: Layer2 = {
         },
       ],
     },
-    dataAvailability: DATA_AVAILABILITY.ANYTRUST_OFF_CHAIN(DAC),
+    dataAvailability: TECHNOLOGY_DATA_AVAILABILITY.ANYTRUST_OFF_CHAIN(DAC),
     operator: {
       ...OPERATOR.CENTRALIZED_SEQUENCER,
       references: [

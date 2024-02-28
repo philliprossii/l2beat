@@ -21,7 +21,6 @@ export function underReview(templateVars: underReviewConfig): Layer2 {
     id: ProjectId(templateVars.id),
     display: {
       ...templateVars.display,
-      dataAvailabilityMode: 'NotApplicable',
     },
     stage: {
       stage: 'UnderReview',

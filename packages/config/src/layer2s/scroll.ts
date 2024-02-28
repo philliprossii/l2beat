@@ -6,7 +6,6 @@ import {
 } from '@l2beat/shared-pure'
 
 import {
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
@@ -14,6 +13,7 @@ import {
   RISK_VIEW,
   STATE_CORRECTNESS,
   STATE_ZKP_SN,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { getStage } from './common/stages/getStage'
@@ -51,7 +51,6 @@ export const scroll: Layer2 = {
       'Scroll is ZK Rollup that extends Ethereum’s capabilities through ZK tech and EVM compatibility.',
     purposes: ['Universal'],
     category: 'ZK Rollup',
-    dataAvailabilityMode: 'TxData',
     links: {
       websites: ['https://scroll.io'],
       apps: [
@@ -173,6 +172,10 @@ export const scroll: Layer2 = {
       ],
     },
   },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'Transaction data',
+  },
   riskView: makeBridgeCompatible({
     stateValidation: {
       ...STATE_ZKP_SN,
@@ -249,7 +252,7 @@ export const scroll: Layer2 = {
       ],
     },
     dataAvailability: {
-      ...DATA_AVAILABILITY.ON_CHAIN_CANONICAL,
+      ...TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN_CANONICAL,
       references: [
         {
           text: 'ScrollChain.sol#L164 - Etherscan source code commitBatch() function',

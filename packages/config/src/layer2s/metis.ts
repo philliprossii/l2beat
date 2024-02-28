@@ -29,7 +29,6 @@ export const metis: Layer2 = {
     purposes: ['Universal'],
     provider: 'OVM',
     category: 'Optimium',
-    dataAvailabilityMode: 'NotApplicable',
     links: {
       websites: ['https://metis.io'],
       apps: [],
@@ -67,6 +66,12 @@ export const metis: Layer2 = {
       defaultCallsPerMinute: 1500,
       startBlock: 1,
     },
+  },
+  dataAvailability: {
+    layer: 'MEMO',
+    fallback: 'None',
+    bridge: 'Optimistic',
+    type: 'Not applicable',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_NONE,

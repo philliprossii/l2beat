@@ -7,7 +7,6 @@ import {
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   FRONTRUNNING_RISK,
@@ -15,7 +14,9 @@ import {
   RISK_VIEW,
   SEQUENCER_NO_MECHANISM,
   STATE_CORRECTNESS,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
+import { DATA_AVAILABILITY } from '../common/dataAvailabilty'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { Layer2 } from './types'
 
@@ -84,8 +85,6 @@ const DACThreshold = discovery.getContractValue<number>(
   'requiredAmountOfSignatures',
 )
 
-const DACThresholdString = `${DACThreshold}/${DACSize}`
-
 export const zkfair: Layer2 = {
   type: 'layer2',
   id: ProjectId('zkfair'),
@@ -97,7 +96,6 @@ export const zkfair: Layer2 = {
     description: 'ZKFair is a Validium based on Polygon CDK and Celestia DA.',
     purposes: ['Universal'],
     category: 'Validium',
-    dataAvailabilityMode: 'NotApplicable',
     provider: 'Polygon',
     links: {
       websites: ['https://zkfair.io/'],
@@ -138,6 +136,15 @@ export const zkfair: Layer2 = {
       },
     ],
     coingeckoPlatform: 'zkfair',
+  },
+  dataAvailability: {
+    layer: 'DAC',
+    bridge: DATA_AVAILABILITY.DAC_BRIDGE({
+      membersCount: DACSize,
+      requiredSignatures: DACThreshold,
+    }),
+    fallback: 'None',
+    type: 'Not applicable',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {
@@ -207,7 +214,7 @@ export const zkfair: Layer2 = {
       ],
     },
     dataAvailability: {
-      ...DATA_AVAILABILITY.GENERIC_OFF_CHAIN,
+      ...TECHNOLOGY_DATA_AVAILABILITY.GENERIC_OFF_CHAIN,
       references: [
         {
           text: 'CDKValidium.sol#L494 - Etherscan source code, sequencedBatches mapping',
@@ -300,7 +307,7 @@ export const zkfair: Layer2 = {
 
         return members
       })(),
-      description: `Members of the Data Availability Committee. The setup is equivalent to a ${DACThresholdString} multisig.`,
+      description: `Members of the Data Availability Committee. The setup is equivalent to a ${DACThreshold}/${DACSize} multisig.`,
     },
     {
       name: 'DAC Owner',

@@ -26,7 +26,7 @@ export const zkswap2: Layer2 = {
     purposes: ['Payments', 'AMM'],
     provider: 'zkSync Lite',
     category: 'ZK Rollup',
-    dataAvailabilityMode: 'StateDiffs',
+
     links: {
       websites: ['https://zks.org/'],
       apps: ['https://zks.app'],
@@ -54,6 +54,10 @@ export const zkswap2: Layer2 = {
         tokens: '*',
       },
     ],
+  },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_SN,

@@ -7,7 +7,6 @@ import {
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
@@ -15,6 +14,7 @@ import {
   NUGGETS,
   OPERATOR,
   RISK_VIEW,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
 import { subtractOneAfterBlockInclusive } from '../common/assessCount'
 import { UPGRADE_MECHANISM } from '../common/upgradeMechanism'
@@ -94,7 +94,6 @@ export const arbitrum: Layer2 = {
     description: `Arbitrum One is a general-purpose Optimistic Rollup built by Offchain Labs and governed by the Arbitrum DAO.`,
     purposes: ['Universal'],
     category: 'Optimistic Rollup',
-    dataAvailabilityMode: 'TxData',
     provider: 'Arbitrum',
     links: {
       websites: ['https://arbitrum.io/', 'https://arbitrum.foundation/'],
@@ -257,6 +256,10 @@ export const arbitrum: Layer2 = {
     ],
     coingeckoPlatform: 'arbitrum-one',
   },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'Transaction data',
+  },
   riskView: makeBridgeCompatible({
     stateValidation: {
       ...RISK_VIEW.STATE_ARBITRUM_FRAUD_PROOFS(nOfChallengers),
@@ -371,7 +374,7 @@ export const arbitrum: Layer2 = {
       ],
     },
     dataAvailability: {
-      ...DATA_AVAILABILITY.ON_CHAIN_CANONICAL,
+      ...TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN_CANONICAL,
       references: [
         {
           text: 'Sequencing followed by deterministic execution - Arbitrum documentation',

@@ -39,7 +39,7 @@ export const zkspace: Layer2 = {
     purposes: ['NFT', 'AMM', 'Payments'],
     provider: 'zkSync Lite',
     category: 'ZK Rollup',
-    dataAvailabilityMode: 'StateDiffs',
+
     links: {
       websites: ['https://zks.org/'],
       apps: ['https://zks.app'],
@@ -90,6 +90,10 @@ export const zkspace: Layer2 = {
         },
       ],
     },
+  },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {

@@ -2,13 +2,13 @@ import { EthereumAddress, ProjectId, UnixTime } from '@l2beat/shared-pure'
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
   NEW_CRYPTOGRAPHY,
   OPERATOR,
   RISK_VIEW,
   STATE_CORRECTNESS,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { getStage } from './common/stages/getStage'
@@ -56,8 +56,6 @@ export const aztecV1: Layer2 = {
       'Aztec Connect is an open source layer 2 network that aims to enable affordable, private crypto payments via zero-knowledge proofs.',
     purposes: ['Private payments'],
     category: 'ZK Rollup',
-    dataAvailabilityMode: 'StateDiffs',
-
     links: {
       websites: ['https://aztec.network/'],
       apps: ['https://old.zk.money'],
@@ -87,6 +85,10 @@ export const aztecV1: Layer2 = {
       defaultUrl: 'https://api.aztec.network/falafel-mainnet',
       defaultCallsPerMinute: 3_000,
     },
+  },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {
@@ -210,7 +212,7 @@ export const aztecV1: Layer2 = {
       ],
     },
     dataAvailability: {
-      ...DATA_AVAILABILITY.ON_CHAIN,
+      ...TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN,
       references: [
         {
           text: 'RollupProcessor.sol#L359 - Etherscan source code',

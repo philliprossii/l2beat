@@ -7,7 +7,6 @@ import {
 import { utils } from 'ethers'
 
 import {
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
@@ -15,6 +14,7 @@ import {
   OPERATOR,
   RISK_VIEW,
   STATE_CORRECTNESS,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { getStage } from './common/stages/getStage'
@@ -59,7 +59,6 @@ export const degate: Layer2 = {
     purposes: ['Exchange'],
     provider: 'Loopring',
     category: 'ZK Rollup',
-    dataAvailabilityMode: 'StateDiffs',
 
     links: {
       websites: ['https://degate.com/'],
@@ -102,6 +101,10 @@ export const degate: Layer2 = {
         },
       ],
     },
+  },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_SN,
@@ -185,7 +188,7 @@ export const degate: Layer2 = {
       ],
     },
     dataAvailability: {
-      ...DATA_AVAILABILITY.ON_CHAIN,
+      ...TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN,
       references: [
         {
           text: 'Introduction - DeGate design doc',

@@ -7,7 +7,6 @@ import {
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
@@ -15,6 +14,7 @@ import {
   OPERATOR,
   RISK_VIEW,
   STATE_CORRECTNESS,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { HARDCODED } from '../discovery/values/hardcoded'
@@ -61,7 +61,6 @@ export const zksynclite: Layer2 = {
     purposes: ['Payments'],
     provider: 'zkSync Lite',
     category: 'ZK Rollup',
-    dataAvailabilityMode: 'StateDiffs',
 
     links: {
       websites: ['https://zksync.io/'],
@@ -123,6 +122,10 @@ export const zksynclite: Layer2 = {
         },
       ],
     },
+  },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {
@@ -256,7 +259,7 @@ export const zksynclite: Layer2 = {
       ],
     },
     dataAvailability: {
-      ...DATA_AVAILABILITY.ON_CHAIN,
+      ...TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN,
       references: [
         {
           text: 'Overview - zkSync documentation',

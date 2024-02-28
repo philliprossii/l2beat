@@ -8,7 +8,6 @@ import { utils } from 'ethers'
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   FRONTRUNNING_RISK,
@@ -16,6 +15,7 @@ import {
   RISK_VIEW,
   ScalingProjectPermissionedAccount,
   STATE_CORRECTNESS,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { getStage } from './common/stages/getStage'
@@ -79,7 +79,6 @@ export const linea: Layer2 = {
       'Linea is a ZK Rollup powered by Consensys zkEVM, designed to scale the Ethereum network.',
     purposes: ['Universal'],
     category: 'ZK Rollup',
-    dataAvailabilityMode: 'TxData',
     links: {
       websites: ['https://linea.build/'],
       apps: [],
@@ -191,6 +190,10 @@ export const linea: Layer2 = {
     ],
     coingeckoPlatform: 'linea',
   },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'Transaction data',
+  },
   riskView: makeBridgeCompatible({
     stateValidation: {
       ...RISK_VIEW.STATE_ZKP_SN,
@@ -266,7 +269,7 @@ export const linea: Layer2 = {
       ],
     },
     dataAvailability: {
-      ...DATA_AVAILABILITY.ON_CHAIN_CANONICAL,
+      ...TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN_CANONICAL,
       references: [
         {
           text: 'LineaRollup.sol - Etherscan source code, submitData() function',

@@ -7,7 +7,6 @@ import {
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
@@ -16,7 +15,9 @@ import {
   OPERATOR,
   RISK_VIEW,
   STATE_CORRECTNESS,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
+import { DATA_AVAILABILITY } from '../common/dataAvailabilty'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import {
   getCommittee,
@@ -43,6 +44,8 @@ const freezeGracePeriod = discovery.getContractValue<number>(
   'FREEZE_GRACE_PERIOD',
 )
 
+const committee = getCommittee(discovery)
+
 export const canvasconnect: Layer2 = {
   type: 'layer2',
   id: ProjectId('canvasconnect'),
@@ -56,7 +59,6 @@ export const canvasconnect: Layer2 = {
     purposes: ['Privacy', 'DeFi'],
     provider: 'StarkEx',
     category: 'Validium',
-    dataAvailabilityMode: 'NotApplicable',
     links: {
       websites: ['https://canvas.co/'],
       apps: [],
@@ -84,6 +86,15 @@ export const canvasconnect: Layer2 = {
       }),
     ],
   },
+  dataAvailability: {
+    layer: 'DAC',
+    fallback: 'None',
+    bridge: DATA_AVAILABILITY.DAC_BRIDGE({
+      membersCount: committee.accounts.length,
+      requiredSignatures: committee.minSigners,
+    }),
+    type: 'Not applicable',
+  },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_ST,
     dataAvailability: RISK_VIEW.DATA_EXTERNAL_DAC(),
@@ -96,7 +107,7 @@ export const canvasconnect: Layer2 = {
   technology: {
     stateCorrectness: STATE_CORRECTNESS.STARKEX_VALIDITY_PROOFS,
     newCryptography: NEW_CRYPTOGRAPHY.ZK_STARKS,
-    dataAvailability: DATA_AVAILABILITY.STARKEX_OFF_CHAIN,
+    dataAvailability: TECHNOLOGY_DATA_AVAILABILITY.STARKEX_OFF_CHAIN,
     operator: OPERATOR.STARKEX_OPERATOR,
     forceTransactions: FORCE_TRANSACTIONS.STARKEX_SPOT_WITHDRAW(),
     exitMechanisms: EXITS.STARKEX_SPOT,
@@ -120,7 +131,7 @@ export const canvasconnect: Layer2 = {
         'Can upgrade implementation of the system, potentially gaining access to all funds stored in the bridge. ' +
         delayDescriptionFromString(upgradeDelay),
     },
-    getCommittee(discovery),
+    committee,
     ...getSHARPVerifierGovernors(discovery, verifierAddress),
     {
       name: 'Operators',

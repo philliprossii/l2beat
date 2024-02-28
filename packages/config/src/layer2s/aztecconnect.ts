@@ -7,7 +7,6 @@ import {
 
 import {
   CONTRACTS,
-  DATA_AVAILABILITY,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
   NEW_CRYPTOGRAPHY,
@@ -15,6 +14,7 @@ import {
   OPERATOR,
   RISK_VIEW,
   STATE_CORRECTNESS,
+  TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { getStage } from './common/stages/getStage'
@@ -88,7 +88,6 @@ export const aztecconnect: Layer2 = {
       'Aztec Connect is an open source layer 2 network that aims to enable affordable, private crypto payments via zero-knowledge proofs.',
     purposes: ['DeFi'],
     category: 'ZK Rollup',
-    dataAvailabilityMode: 'StateDiffs',
     links: {
       websites: ['https://aztec.network/'],
       apps: ['https://zk.money'],
@@ -127,6 +126,10 @@ export const aztecconnect: Layer2 = {
         },
       ],
     },
+  },
+  dataAvailability: {
+    layer: 'On chain',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {
@@ -234,7 +237,7 @@ export const aztecconnect: Layer2 = {
       ],
     },
     dataAvailability: {
-      ...DATA_AVAILABILITY.ON_CHAIN,
+      ...TECHNOLOGY_DATA_AVAILABILITY.ON_CHAIN,
       references: [
         {
           text: 'RollupProcessorV2.sol#L686 - Etherscan source code',

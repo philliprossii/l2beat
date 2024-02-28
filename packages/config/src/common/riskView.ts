@@ -133,9 +133,10 @@ export const DATA_EXTERNAL_MEMO: ScalingProjectRiskViewEntry = {
   sentiment: 'bad',
 }
 
-export function DATA_EXTERNAL_DAC(
-  DAC?: Record<string, number>,
-): ScalingProjectRiskViewEntry {
+export function DATA_EXTERNAL_DAC(DAC?: {
+  keyCount: number
+  threshold: number
+}): ScalingProjectRiskViewEntry {
   const additionalString =
     DAC !== undefined
       ? ` with a threshold of ${DAC.keyCount - DAC.threshold + 1}/${
