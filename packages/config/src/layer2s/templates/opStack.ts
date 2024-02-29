@@ -165,7 +165,7 @@ export function opStack(templateVars: OpStackConfig): Layer2 {
             type: 'Transaction data',
           }
         : {
-            layer: 'On chain',
+            layer: 'Ethereum',
             type: 'Transaction data',
           },
     riskView: makeBridgeCompatible({

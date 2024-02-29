@@ -99,7 +99,7 @@ export const honeypot: Layer2 = {
     },
   },
   dataAvailability: {
-    layer: 'On chain',
+    layer: 'Ethereum',
     type: 'Transaction data',
   },
   riskView: makeBridgeCompatible({

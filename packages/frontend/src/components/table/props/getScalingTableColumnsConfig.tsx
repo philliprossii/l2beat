@@ -725,7 +725,7 @@ export function getScalingDataAvailabilityColumnsConfig() {
       },
     },
     {
-      name: 'Layer',
+      name: 'DA Layer',
       getValue: (project) => project.dataAvailability.layer,
       sorting: {
         getOrderValue: (project) => project.dataAvailability.layer,
@@ -733,7 +733,7 @@ export function getScalingDataAvailabilityColumnsConfig() {
       },
     },
     {
-      name: 'Fallback',
+      name: 'Liveness Fallback',
       getValue: (project) =>
         isOffChainDataAvailability(project.dataAvailability) ? (
           project.dataAvailability.fallback
@@ -749,7 +749,7 @@ export function getScalingDataAvailabilityColumnsConfig() {
       },
     },
     {
-      name: 'Bridge',
+      name: 'DA Bridge',
       getValue: (project) =>
         isOffChainDataAvailability(project.dataAvailability) ? (
           project.dataAvailability.bridge

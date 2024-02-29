@@ -363,7 +363,7 @@ export function orbitStackL2(templateVars: OrbitStackConfigL2): Layer2 {
           type: 'Transaction data',
         }
       : {
-          layer: 'On chain',
+          layer: 'Ethereum',
           type: 'Transaction data',
         },
     riskView: makeBridgeCompatible({

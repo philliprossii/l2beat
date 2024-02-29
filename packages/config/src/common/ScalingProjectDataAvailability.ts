@@ -8,7 +8,7 @@ export type ScalingProjectDataAvailability =
   | OffChainDataAvailability
 
 type OnChainDataAvailability = {
-  layer: 'On chain' | 'On chain (blobs)'
+  layer: 'Ethereum' | 'Ethereum (blobs)'
   type: ScalingProjectDataAvailabilityMode
 }
 

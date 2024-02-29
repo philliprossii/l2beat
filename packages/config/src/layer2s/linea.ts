@@ -191,7 +191,7 @@ export const linea: Layer2 = {
     coingeckoPlatform: 'linea',
   },
   dataAvailability: {
-    layer: 'On chain',
+    layer: 'Ethereum',
     type: 'Transaction data',
   },
   riskView: makeBridgeCompatible({

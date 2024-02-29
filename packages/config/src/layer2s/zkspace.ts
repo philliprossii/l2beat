@@ -92,7 +92,7 @@ export const zkspace: Layer2 = {
     },
   },
   dataAvailability: {
-    layer: 'On chain',
+    layer: 'Ethereum',
     type: 'State diffs',
   },
   riskView: makeBridgeCompatible({

@@ -125,7 +125,7 @@ export const degate3: Layer2 = {
     },
   },
   dataAvailability: {
-    layer: 'On chain',
+    layer: 'Ethereum',
     type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
