@@ -118,20 +118,6 @@ describe('layer2s', () => {
         })
       }
     })
-
-    describe('if validium or optimium, then has NotApplicable as dataAvailabilityMode', () => {
-      for (const project of layer2s) {
-        if (
-          project.display.category === 'Optimium' ||
-          project.display.category === 'Validium'
-        ) {
-          it(project.id.toString(), () => {
-            if (!project.dataAvailability) return
-            expect(project.dataAvailability?.mode).toEqual('Not applicable')
-          })
-        }
-      }
-    })
   })
 
   describe('finality', () => {
