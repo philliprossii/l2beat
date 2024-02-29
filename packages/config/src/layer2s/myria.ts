@@ -99,7 +99,7 @@ export const myria: Layer2 = {
       membersCount: committee.accounts.length,
       requiredSignatures: committee.minSigners,
     }),
-    type: 'Not applicable',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_ST,

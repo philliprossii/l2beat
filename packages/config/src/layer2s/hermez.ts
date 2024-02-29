@@ -60,10 +60,6 @@ export const hermez: Layer2 = {
       },
     ],
   },
-  dataAvailability: {
-    layer: 'On chain',
-    type: 'Not applicable',
-  },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_SN,
     dataAvailability: RISK_VIEW.DATA_ON_CHAIN,

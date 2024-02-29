@@ -360,7 +360,7 @@ export function orbitStackL2(templateVars: OrbitStackConfigL2): Layer2 {
           layer: 'DAC',
           bridge: 'None',
           fallback: 'None',
-          type: 'Not applicable',
+          type: 'Transaction data',
         }
       : {
           layer: 'On chain',

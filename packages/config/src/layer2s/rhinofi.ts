@@ -121,7 +121,7 @@ export const rhinofi: Layer2 = {
       requiredSignatures: committee.minSigners,
     }),
     fallback: 'None',
-    type: 'Not applicable',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_ST,

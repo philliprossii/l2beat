@@ -144,7 +144,7 @@ export const zkfair: Layer2 = {
       requiredSignatures: DACThreshold,
     }),
     fallback: 'None',
-    type: 'Not applicable',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {

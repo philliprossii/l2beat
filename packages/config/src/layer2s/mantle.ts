@@ -89,7 +89,7 @@ export const mantle: Layer2 = {
     layer: 'External',
     fallback: 'None',
     bridge: 'None',
-    type: 'Not applicable',
+    type: 'Transaction data',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_NONE,

@@ -126,7 +126,7 @@ export const nova: Layer2 = {
     layer: 'DAC',
     bridge: `${DAC.keyCount - DAC.threshold + 1}/${DAC.keyCount} DAC Members`,
     fallback: 'None',
-    type: 'Not applicable',
+    type: 'Transaction data',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ARBITRUM_FRAUD_PROOFS(nOfChallengers),

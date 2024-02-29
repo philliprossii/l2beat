@@ -162,7 +162,7 @@ export function opStack(templateVars: OpStackConfig): Layer2 {
             layer: 'Celestia',
             bridge: 'None',
             fallback: 'On chain',
-            type: 'Not applicable',
+            type: 'Transaction data',
           }
         : {
             layer: 'On chain',

@@ -71,7 +71,7 @@ export const metis: Layer2 = {
     layer: 'MEMO',
     fallback: 'None',
     bridge: 'Optimistic',
-    type: 'Not applicable',
+    type: 'Transaction data',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_NONE,

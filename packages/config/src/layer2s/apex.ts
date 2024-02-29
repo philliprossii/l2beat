@@ -128,7 +128,7 @@ export const apex: Layer2 = {
     layer: 'DAC',
     fallback: 'None',
     bridge: 'DAC Members',
-    type: 'Not applicable',
+    type: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_ST,
