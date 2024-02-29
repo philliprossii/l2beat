@@ -124,8 +124,9 @@ export const zksynclite: Layer2 = {
     },
   },
   dataAvailability: {
+    type: 'On chain',
     layer: 'Ethereum',
-    type: 'State diffs',
+    mode: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {

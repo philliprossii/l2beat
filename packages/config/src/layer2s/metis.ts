@@ -68,10 +68,11 @@ export const metis: Layer2 = {
     },
   },
   dataAvailability: {
+    type: 'Off chain',
     layer: 'MEMO',
     fallback: 'None',
     bridge: 'Optimistic',
-    type: 'Transaction data',
+    mode: 'Transaction data',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_NONE,

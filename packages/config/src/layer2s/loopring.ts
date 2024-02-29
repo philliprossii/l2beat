@@ -124,8 +124,9 @@ export const loopring: Layer2 = {
     },
   },
   dataAvailability: {
+    type: 'On chain',
     layer: 'Ethereum',
-    type: 'State diffs',
+    mode: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_SN,

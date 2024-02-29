@@ -258,8 +258,9 @@ export const polygonzkevm: Layer2 = {
     ],
   },
   dataAvailability: {
+    type: 'On chain',
     layer: 'Ethereum',
-    type: 'Transaction data',
+    mode: 'Transaction data',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {

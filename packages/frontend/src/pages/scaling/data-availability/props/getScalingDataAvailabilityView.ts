@@ -26,7 +26,6 @@ function getScalingDataAvailabilityViewEntry(
   project: Layer2,
 ): ScalingDataAvailabilityViewEntry | undefined {
   if (!project.dataAvailability) return
-
   return {
     name: project.display.name,
     shortName: project.display.shortName,

@@ -7,6 +7,7 @@ import {
 
 import {
   CONTRACTS,
+  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   makeBridgeCompatible,
@@ -17,7 +18,6 @@ import {
   STATE_CORRECTNESS,
   TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
-import { DATA_AVAILABILITY } from '../common/dataAvailability'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import {
   getCommittee,
@@ -87,13 +87,14 @@ export const canvasconnect: Layer2 = {
     ],
   },
   dataAvailability: {
+    type: 'Off chain',
     layer: 'DAC',
     fallback: 'None',
     bridge: DATA_AVAILABILITY.DAC_BRIDGE({
       membersCount: committee.accounts.length,
       requiredSignatures: committee.minSigners,
     }),
-    type: 'State diffs',
+    mode: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_ST,

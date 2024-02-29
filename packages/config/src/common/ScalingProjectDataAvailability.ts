@@ -8,11 +8,13 @@ export type ScalingProjectDataAvailability =
   | OffChainDataAvailability
 
 type OnChainDataAvailability = {
+  type: 'On chain'
   layer: 'Ethereum' | 'Ethereum (blobs)'
-  type: ScalingProjectDataAvailabilityMode
+  mode: ScalingProjectDataAvailabilityMode
 }
 
 type OffChainDataAvailability = {
+  type: 'Off chain'
   layer: 'MEMO' | 'DAC' | 'Celestia' | 'External' | 'MantleDA'
   fallback: 'None' | 'Not applicable' | 'On chain'
   bridge:
@@ -22,11 +24,5 @@ type OffChainDataAvailability = {
     | 'Optimistic'
     | 'DAC Members'
     | `${number}/${number} DAC Members`
-  type: ScalingProjectDataAvailabilityMode
-}
-
-export const isOffChainDataAvailability = (
-  dataAvailability: ScalingProjectDataAvailability,
-): dataAvailability is OffChainDataAvailability => {
-  return 'fallback' in dataAvailability && 'bridge' in dataAvailability
+  mode: ScalingProjectDataAvailabilityMode
 }

@@ -125,10 +125,11 @@ export const apex: Layer2 = {
     },
   },
   dataAvailability: {
+    type: 'Off chain',
     layer: 'DAC',
     fallback: 'None',
     bridge: 'DAC Members',
-    type: 'State diffs',
+    mode: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_ZKP_ST,

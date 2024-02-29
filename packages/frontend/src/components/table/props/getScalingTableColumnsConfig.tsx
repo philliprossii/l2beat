@@ -1,4 +1,3 @@
-import { isOffChainDataAvailability } from '@l2beat/config'
 import React from 'react'
 
 import { ActivityViewEntry } from '../../../pages/scaling/activity/types'
@@ -735,14 +734,14 @@ export function getScalingDataAvailabilityColumnsConfig() {
     {
       name: 'Liveness Fallback',
       getValue: (project) =>
-        isOffChainDataAvailability(project.dataAvailability) ? (
+        project.dataAvailability.type === 'Off chain' ? (
           project.dataAvailability.fallback
         ) : (
           <Badge type="gray">N/A</Badge>
         ),
       sorting: {
         getOrderValue: (project) =>
-          isOffChainDataAvailability(project.dataAvailability)
+          project.dataAvailability.type === 'Off chain'
             ? project.dataAvailability.fallback
             : undefined,
         rule: 'alphabetical',
@@ -751,14 +750,14 @@ export function getScalingDataAvailabilityColumnsConfig() {
     {
       name: 'DA Bridge',
       getValue: (project) =>
-        isOffChainDataAvailability(project.dataAvailability) ? (
+        project.dataAvailability.type === 'Off chain' ? (
           project.dataAvailability.bridge
         ) : (
           <Badge type="gray">N/A</Badge>
         ),
       sorting: {
         getOrderValue: (project) =>
-          isOffChainDataAvailability(project.dataAvailability)
+          project.dataAvailability.type === 'Off chain'
             ? project.dataAvailability.bridge
             : undefined,
         rule: 'alphabetical',
@@ -766,17 +765,9 @@ export function getScalingDataAvailabilityColumnsConfig() {
     },
     {
       name: 'Type of data',
-      getValue: (project) =>
-        project.dataAvailability.type === 'Not applicable' ? (
-          <Badge type="gray">N/A</Badge>
-        ) : (
-          project.dataAvailability.type
-        ),
+      getValue: (project) => project.dataAvailability.mode,
       sorting: {
-        getOrderValue: (project) =>
-          project.dataAvailability.type !== 'Not applicable'
-            ? project.dataAvailability.type
-            : undefined,
+        getOrderValue: (project) => project.dataAvailability.mode,
         rule: 'alphabetical',
       },
     },

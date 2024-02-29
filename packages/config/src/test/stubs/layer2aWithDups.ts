@@ -57,6 +57,11 @@ export const layer2aWithDups: Layer2 = {
       },
     ],
   },
+  dataAvailability: {
+    type: 'On chain',
+    layer: 'Ethereum',
+    mode: 'Transaction data',
+  },
   riskView: {
     stateValidation: RISK_VIEW.STATE_FP,
     dataAvailability: RISK_VIEW.DATA_ON_CHAIN,

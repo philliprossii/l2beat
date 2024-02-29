@@ -257,8 +257,9 @@ export const arbitrum: Layer2 = {
     coingeckoPlatform: 'arbitrum-one',
   },
   dataAvailability: {
+    type: 'On chain',
     layer: 'Ethereum',
-    type: 'Transaction data',
+    mode: 'Transaction data',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {

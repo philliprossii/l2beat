@@ -357,14 +357,16 @@ export function orbitStackL2(templateVars: OrbitStackConfigL2): Layer2 {
         }),
     dataAvailability: postsToExternalDA
       ? {
+          type: 'Off chain',
           layer: 'DAC',
           bridge: 'None',
           fallback: 'None',
-          type: 'Transaction data',
+          mode: 'Transaction data',
         }
       : {
+          type: 'On chain',
           layer: 'Ethereum',
-          type: 'Transaction data',
+          mode: 'Transaction data',
         },
     riskView: makeBridgeCompatible({
       stateValidation: RISK_VIEW.STATE_ARBITRUM_FRAUD_PROOFS(nOfChallengers),

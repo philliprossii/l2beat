@@ -127,7 +127,7 @@ describe('layer2s', () => {
         ) {
           it(project.id.toString(), () => {
             if (!project.dataAvailability) return
-            expect(project.dataAvailability?.type).toEqual('Not applicable')
+            expect(project.dataAvailability?.mode).toEqual('Not applicable')
           })
         }
       }

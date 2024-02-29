@@ -54,8 +54,9 @@ export const fuelv1: Layer2 = {
     ],
   },
   dataAvailability: {
+    type: 'On chain',
     layer: 'Ethereum',
-    type: 'Transaction data',
+    mode: 'Transaction data',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_FP_1R,

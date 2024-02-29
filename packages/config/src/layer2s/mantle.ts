@@ -86,10 +86,11 @@ export const mantle: Layer2 = {
     },
   },
   dataAvailability: {
+    type: 'Off chain',
     layer: 'External',
     fallback: 'None',
     bridge: 'None',
-    type: 'Transaction data',
+    mode: 'Transaction data',
   },
   riskView: makeBridgeCompatible({
     stateValidation: RISK_VIEW.STATE_NONE,

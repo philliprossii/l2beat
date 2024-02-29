@@ -43,7 +43,7 @@ export function getScalingFinalityViewEntry(
     shortName: project.display.shortName,
     slug: project.display.slug,
     category: project.display.category,
-    dataAvailabilityMode: daModeToDisplay(project.dataAvailability?.type),
+    dataAvailabilityMode: daModeToDisplay(project.dataAvailability?.mode),
     provider: project.display.provider,
     warning: project.display.warning,
     redWarning: project.display.redWarning,

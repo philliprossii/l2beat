@@ -159,14 +159,16 @@ export function opStack(templateVars: OpStackConfig): Layer2 {
     dataAvailability:
       templateVars.daProvider !== undefined
         ? {
+            type: 'Off chain',
             layer: 'Celestia',
             bridge: 'None',
             fallback: 'On chain',
-            type: 'Transaction data',
+            mode: 'Transaction data',
           }
         : {
+            type: 'On chain',
             layer: 'Ethereum',
-            type: 'Transaction data',
+            mode: 'Transaction data',
           },
     riskView: makeBridgeCompatible({
       stateValidation: RISK_VIEW.STATE_NONE,

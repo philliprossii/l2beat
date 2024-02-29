@@ -7,6 +7,7 @@ import {
 
 import {
   CONTRACTS,
+  DATA_AVAILABILITY,
   EXITS,
   FORCE_TRANSACTIONS,
   FRONTRUNNING_RISK,
@@ -16,7 +17,6 @@ import {
   STATE_CORRECTNESS,
   TECHNOLOGY_DATA_AVAILABILITY,
 } from '../common'
-import { DATA_AVAILABILITY } from '../common/dataAvailability'
 import { ProjectDiscovery } from '../discovery/ProjectDiscovery'
 import { Layer2 } from './types'
 
@@ -138,13 +138,14 @@ export const zkfair: Layer2 = {
     coingeckoPlatform: 'zkfair',
   },
   dataAvailability: {
+    type: 'Off chain',
     layer: 'DAC',
     bridge: DATA_AVAILABILITY.DAC_BRIDGE({
       membersCount: DACSize,
       requiredSignatures: DACThreshold,
     }),
     fallback: 'None',
-    type: 'State diffs',
+    mode: 'State diffs',
   },
   riskView: makeBridgeCompatible({
     stateValidation: {
