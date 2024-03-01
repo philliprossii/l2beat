@@ -1,5 +1,9 @@
+import { notUndefined } from '@l2beat/shared-pure'
+import uniq from 'lodash/uniq'
 import React from 'react'
 
+import { RichSelect } from '../../../../components/RichSelect'
+import { generateSlugList } from '../../../../components/table/filters/FiltersWrapper'
 import { ScalingFilters } from '../../../../components/table/filters/ScalingFilters'
 import { getScalingRowProps } from '../../../../components/table/props/getScalingRowProps'
 import { getScalingDataAvailabilityColumnsConfig } from '../../../../components/table/props/getScalingTableColumnsConfig'
@@ -19,9 +23,29 @@ export function ScalingDataAvailabilityView({
   }
   const columnsConfig = getScalingDataAvailabilityColumnsConfig()
 
+  const daLayers = uniq(items.map((i) => i.dataAvailability.layer))
+    .sort()
+    .filter(notUndefined)
+    .map((layer) => ({
+      label: layer,
+      value: generateSlugList(items, (i) => i.dataAvailability.layer === layer),
+    }))
+
   return (
     <section className="mt-4 flex flex-col gap-y-2 sm:mt-8">
-      <ScalingFilters items={items} />
+      <ScalingFilters items={items}>
+        <RichSelect label="DA Layer" id="da-layer-select">
+          {daLayers.map((category) => (
+            <RichSelect.Item
+              selectedLabel={category.label}
+              key={category.label}
+              value={category.value}
+            >
+              {category.label}
+            </RichSelect.Item>
+          ))}
+        </RichSelect>
+      </ScalingFilters>
       <TableView columnsConfig={columnsConfig} rows={rows} items={items} />
     </section>
   )
